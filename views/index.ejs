@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>To Do List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agdasima&family=Borel&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/main.css">
+  </head>
+
+  <body>
+
+    <header>
+      <div class="topnav">
+        <a class="active" href="/">Today</a>
+        <a href="/work">Work</a>
+      </div>
+    </header>
+
+    <main>
+      <div class="box" id="heading">
+
+        <% if(locals.date && locals.day && locals.month) { %>
+          <h1><%= day %>, <%= month %> <%= date %></h1>
+        <% } else { %>
+          <h1>Work List</h1>
+        <% } %>
+
+      </div>
+
+      <div class="box">
+
+        <% if(locals.date && locals.day && locals.month) { %>
+          <% if(locals.fillerToday) { %>
+            <% for(var i=0; i<fillerToday.length; i++) { %>
+              <div class="item">
+                    <input type="checkbox">
+                    <p> <%= fillerToday[i] %> </p>
+              </div>
+            <% } %>
+          <% } %>
+        <% }  else { %>
+          <% if(locals.fillerWork) { %>
+            <% for(var i=0; i<fillerWork.length; i++) { %>
+              <div class="item">
+                    <input type="checkbox">
+                    <p> <%= fillerWork[i] %> </p>
+              </div>
+            <% } %>
+          <% } %>
+        <% } %>
+
+        <% if(locals.date && locals.day && locals.month) { %>
+          <form class="item" action="/" method="post">
+            <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+            <button type="submit" name="list" value="Work" list="">+</button>
+          </form>
+        <% }  else {%>
+          <form class="item" action="/work" method="post">
+            <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+            <button type="submit" name="list" value="Work" list="">+</button>
+          </form>
+        <% } %>
+
+      </div>
+    </main>
+
+    <footer>Made with ❤️ by Rion King Verma</footer>
+
+  </body>
+</html>
